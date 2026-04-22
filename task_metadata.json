@@ -1,0 +1,454 @@
+{
+  "source_file": "tweets.csv",
+  "raw_row_count": 200785,
+  "usable_row_count": 200775,
+  "tasks": {
+    "emoji": {
+      "n_total": 100000,
+      "n_train": 80000,
+      "n_val": 10000,
+      "n_test": 10000,
+      "n_classes": 20,
+      "label_names": [
+        "red_heart",
+        "smiling_face_with_hearteyes",
+        "face_with_tears_of_joy",
+        "two_hearts",
+        "fire",
+        "smiling_face_with_smiling_eyes",
+        "smiling_face_with_sunglasses",
+        "sparkles",
+        "blue_heart",
+        "face_blowing_a_kiss",
+        "camera",
+        "United_States",
+        "sun",
+        "purple_heart",
+        "winking_face",
+        "hundred_points",
+        "beaming_face_with_smiling_eyes",
+        "Christmas_tree",
+        "camera_with_flash",
+        "winking_face_with_tongue"
+      ],
+      "label_counts_total": {
+        "0": 21058,
+        "1": 10252,
+        "2": 9751,
+        "3": 4956,
+        "4": 6105,
+        "5": 3983,
+        "6": 4278,
+        "7": 5293,
+        "8": 3013,
+        "9": 2737,
+        "10": 3573,
+        "11": 3038,
+        "12": 2640,
+        "13": 2247,
+        "14": 2659,
+        "15": 2326,
+        "16": 2640,
+        "17": 3063,
+        "18": 4056,
+        "19": 2332
+      },
+      "label_counts_train": {
+        "0": 16846,
+        "1": 8202,
+        "2": 7801,
+        "3": 3965,
+        "4": 4884,
+        "5": 3186,
+        "6": 3422,
+        "7": 4234,
+        "8": 2411,
+        "9": 2190,
+        "10": 2858,
+        "11": 2430,
+        "12": 2112,
+        "13": 1798,
+        "14": 2127,
+        "15": 1861,
+        "16": 2112,
+        "17": 2450,
+        "18": 3245,
+        "19": 1866
+      },
+      "label_counts_val": {
+        "0": 2106,
+        "1": 1025,
+        "2": 975,
+        "3": 495,
+        "4": 611,
+        "5": 398,
+        "6": 428,
+        "7": 530,
+        "8": 301,
+        "9": 274,
+        "10": 357,
+        "11": 304,
+        "12": 264,
+        "13": 224,
+        "14": 266,
+        "15": 233,
+        "16": 264,
+        "17": 307,
+        "18": 405,
+        "19": 233
+      },
+      "label_counts_test": {
+        "0": 2106,
+        "1": 1025,
+        "2": 975,
+        "3": 496,
+        "4": 610,
+        "5": 399,
+        "6": 428,
+        "7": 529,
+        "8": 301,
+        "9": 273,
+        "10": 358,
+        "11": 304,
+        "12": 264,
+        "13": 225,
+        "14": 266,
+        "15": 232,
+        "16": 264,
+        "17": 306,
+        "18": 406,
+        "19": 233
+      },
+      "split_dir": "data/splits/emoji"
+    },
+    "emotion": {
+      "n_total": 5052,
+      "n_train": 4041,
+      "n_val": 505,
+      "n_test": 506,
+      "n_classes": 4,
+      "label_names": [
+        "anger",
+        "joy",
+        "optimism",
+        "sadness"
+      ],
+      "label_counts_total": {
+        "0": 2118,
+        "1": 1163,
+        "2": 445,
+        "3": 1326
+      },
+      "label_counts_train": {
+        "0": 1694,
+        "1": 930,
+        "2": 356,
+        "3": 1061
+      },
+      "label_counts_val": {
+        "0": 212,
+        "1": 116,
+        "2": 45,
+        "3": 132
+      },
+      "label_counts_test": {
+        "0": 212,
+        "1": 117,
+        "2": 44,
+        "3": 133
+      },
+      "split_dir": "data/splits/emotion"
+    },
+    "hate": {
+      "n_total": 12960,
+      "n_train": 10368,
+      "n_val": 1296,
+      "n_test": 1296,
+      "n_classes": 2,
+      "label_names": [
+        "non-hate",
+        "hate"
+      ],
+      "label_counts_total": {
+        "0": 7498,
+        "1": 5462
+      },
+      "label_counts_train": {
+        "0": 5998,
+        "1": 4370
+      },
+      "label_counts_val": {
+        "0": 750,
+        "1": 546
+      },
+      "label_counts_test": {
+        "0": 750,
+        "1": 546
+      },
+      "split_dir": "data/splits/hate"
+    },
+    "irony": {
+      "n_total": 4601,
+      "n_train": 3680,
+      "n_val": 460,
+      "n_test": 461,
+      "n_classes": 2,
+      "label_names": [
+        "non_irony",
+        "irony"
+      ],
+      "label_counts_total": {
+        "0": 2389,
+        "1": 2212
+      },
+      "label_counts_train": {
+        "0": 1911,
+        "1": 1769
+      },
+      "label_counts_val": {
+        "0": 239,
+        "1": 221
+      },
+      "label_counts_test": {
+        "0": 239,
+        "1": 222
+      },
+      "split_dir": "data/splits/irony"
+    },
+    "offensive": {
+      "n_total": 14100,
+      "n_train": 11280,
+      "n_val": 1410,
+      "n_test": 1410,
+      "n_classes": 2,
+      "label_names": [
+        "non-offensive",
+        "offensive"
+      ],
+      "label_counts_total": {
+        "0": 9460,
+        "1": 4640
+      },
+      "label_counts_train": {
+        "0": 7568,
+        "1": 3712
+      },
+      "label_counts_val": {
+        "0": 946,
+        "1": 464
+      },
+      "label_counts_test": {
+        "0": 946,
+        "1": 464
+      },
+      "split_dir": "data/splits/offensive"
+    },
+    "sentiment": {
+      "n_total": 59899,
+      "n_train": 47919,
+      "n_val": 5990,
+      "n_test": 5990,
+      "n_classes": 3,
+      "label_names": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "label_counts_total": {
+        "0": 11377,
+        "1": 27479,
+        "2": 21043
+      },
+      "label_counts_train": {
+        "0": 9102,
+        "1": 21983,
+        "2": 16834
+      },
+      "label_counts_val": {
+        "0": 1137,
+        "1": 2748,
+        "2": 2105
+      },
+      "label_counts_test": {
+        "0": 1138,
+        "1": 2748,
+        "2": 2104
+      },
+      "split_dir": "data/splits/sentiment"
+    },
+    "stance_abortion": {
+      "n_total": 933,
+      "n_train": 746,
+      "n_val": 93,
+      "n_test": 94,
+      "n_classes": 3,
+      "label_names": [
+        "none",
+        "against",
+        "favor"
+      ],
+      "label_counts_total": {
+        "0": 222,
+        "1": 544,
+        "2": 167
+      },
+      "label_counts_train": {
+        "0": 177,
+        "1": 435,
+        "2": 134
+      },
+      "label_counts_val": {
+        "0": 22,
+        "1": 54,
+        "2": 17
+      },
+      "label_counts_test": {
+        "0": 23,
+        "1": 55,
+        "2": 16
+      },
+      "split_dir": "data/splits/stance_abortion"
+    },
+    "stance_atheism": {
+      "n_total": 733,
+      "n_train": 586,
+      "n_val": 73,
+      "n_test": 74,
+      "n_classes": 3,
+      "label_names": [
+        "none",
+        "against",
+        "favor"
+      ],
+      "label_counts_total": {
+        "0": 145,
+        "1": 464,
+        "2": 124
+      },
+      "label_counts_train": {
+        "0": 116,
+        "1": 371,
+        "2": 99
+      },
+      "label_counts_val": {
+        "0": 14,
+        "1": 46,
+        "2": 13
+      },
+      "label_counts_test": {
+        "0": 15,
+        "1": 47,
+        "2": 12
+      },
+      "split_dir": "data/splits/stance_atheism"
+    },
+    "stance_climate": {
+      "n_total": 564,
+      "n_train": 451,
+      "n_val": 56,
+      "n_test": 57,
+      "n_classes": 3,
+      "label_names": [
+        "none",
+        "against",
+        "favor"
+      ],
+      "label_counts_total": {
+        "0": 203,
+        "1": 26,
+        "2": 335
+      },
+      "label_counts_train": {
+        "0": 162,
+        "1": 21,
+        "2": 268
+      },
+      "label_counts_val": {
+        "0": 20,
+        "1": 3,
+        "2": 33
+      },
+      "label_counts_test": {
+        "0": 21,
+        "1": 2,
+        "2": 34
+      },
+      "split_dir": "data/splits/stance_climate"
+    },
+    "stance_feminist": {
+      "n_total": 949,
+      "n_train": 759,
+      "n_val": 95,
+      "n_test": 95,
+      "n_classes": 3,
+      "label_names": [
+        "none",
+        "against",
+        "favor"
+      ],
+      "label_counts_total": {
+        "0": 170,
+        "1": 511,
+        "2": 268
+      },
+      "label_counts_train": {
+        "0": 136,
+        "1": 409,
+        "2": 214
+      },
+      "label_counts_val": {
+        "0": 17,
+        "1": 51,
+        "2": 27
+      },
+      "label_counts_test": {
+        "0": 17,
+        "1": 51,
+        "2": 27
+      },
+      "split_dir": "data/splits/stance_feminist"
+    },
+    "stance_hillary": {
+      "n_total": 984,
+      "n_train": 787,
+      "n_val": 98,
+      "n_test": 99,
+      "n_classes": 3,
+      "label_names": [
+        "none",
+        "against",
+        "favor"
+      ],
+      "label_counts_total": {
+        "0": 256,
+        "1": 565,
+        "2": 163
+      },
+      "label_counts_train": {
+        "0": 205,
+        "1": 452,
+        "2": 130
+      },
+      "label_counts_val": {
+        "0": 25,
+        "1": 56,
+        "2": 17
+      },
+      "label_counts_test": {
+        "0": 26,
+        "1": 57,
+        "2": 16
+      },
+      "split_dir": "data/splits/stance_hillary"
+    }
+  },
+  "cleaning": {
+    "url_removed": true,
+    "mention_normalized_to_@user": true,
+    "hashtag_hash_stripped": true,
+    "emoji_removed": true,
+    "html_entities_decoded": true,
+    "whitespace_collapsed": true
+  },
+  "split_strategy": "stratified 80/10/10 (seed=42)"
+}

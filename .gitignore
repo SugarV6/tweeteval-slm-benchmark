@@ -1,0 +1,25 @@
+# LoRA adapters (1.1 GB — too large for Git; upload separately)
+slm_adapters/
+
+# Generated splits (regenerate with clean_tweets.py)
+data/splits/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# IDE / tooling
+.claude/
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

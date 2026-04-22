@@ -1,0 +1,238 @@
+{
+  "tasks": {
+    "emoji": {
+      "n_train": 90000,
+      "n_test": 10000,
+      "n_classes": 20,
+      "models": {
+        "logreg": {
+          "accuracy": 0.4077,
+          "macro_f1": 0.312232220740844,
+          "macro_precision": 0.3145553998988092,
+          "fit_time_sec": 62.86
+        },
+        "linear_svm": {
+          "accuracy": 0.3893,
+          "macro_f1": 0.29886634114314975,
+          "macro_precision": 0.293107729432479,
+          "fit_time_sec": 49.87
+        }
+      },
+      "vectorize_time_sec": 13.59
+    },
+    "emotion": {
+      "n_train": 4546,
+      "n_test": 506,
+      "n_classes": 4,
+      "models": {
+        "logreg": {
+          "accuracy": 0.7233201581027668,
+          "macro_f1": 0.6740192581493432,
+          "macro_precision": 0.6925944121667806,
+          "fit_time_sec": 2.76
+        },
+        "linear_svm": {
+          "accuracy": 0.717391304347826,
+          "macro_f1": 0.6679240999893175,
+          "macro_precision": 0.6937493982269826,
+          "fit_time_sec": 0.31
+        }
+      },
+      "vectorize_time_sec": 1.53
+    },
+    "hate": {
+      "n_train": 11664,
+      "n_test": 1296,
+      "n_classes": 2,
+      "models": {
+        "logreg": {
+          "accuracy": 0.7554012345679012,
+          "macro_f1": 0.7497354700409542,
+          "macro_precision": 0.7492395229237334,
+          "fit_time_sec": 1.1
+        },
+        "linear_svm": {
+          "accuracy": 0.7515432098765432,
+          "macro_f1": 0.7460858306216672,
+          "macro_precision": 0.7453804347826087,
+          "fit_time_sec": 0.67
+        }
+      },
+      "vectorize_time_sec": 5.16
+    },
+    "irony": {
+      "n_train": 4140,
+      "n_test": 461,
+      "n_classes": 2,
+      "models": {
+        "logreg": {
+          "accuracy": 0.648590021691974,
+          "macro_f1": 0.6478592983779705,
+          "macro_precision": 0.648025446445426,
+          "fit_time_sec": 0.17
+        },
+        "linear_svm": {
+          "accuracy": 0.6399132321041214,
+          "macro_f1": 0.639164466239155,
+          "macro_precision": 0.6393230641446748,
+          "fit_time_sec": 0.07
+        }
+      },
+      "vectorize_time_sec": 1.31
+    },
+    "offensive": {
+      "n_train": 12690,
+      "n_test": 1410,
+      "n_classes": 2,
+      "models": {
+        "logreg": {
+          "accuracy": 0.7453900709219858,
+          "macro_f1": 0.7131045568080636,
+          "macro_precision": 0.712113691079217,
+          "fit_time_sec": 1.17
+        },
+        "linear_svm": {
+          "accuracy": 0.7354609929078014,
+          "macro_f1": 0.70029251013357,
+          "macro_precision": 0.7004032285653684,
+          "fit_time_sec": 0.77
+        }
+      },
+      "vectorize_time_sec": 5.54
+    },
+    "sentiment": {
+      "n_train": 53909,
+      "n_test": 5990,
+      "n_classes": 3,
+      "models": {
+        "logreg": {
+          "accuracy": 0.6854757929883138,
+          "macro_f1": 0.6758840996477748,
+          "macro_precision": 0.6720904563101188,
+          "fit_time_sec": 9.48
+        },
+        "linear_svm": {
+          "accuracy": 0.6674457429048414,
+          "macro_f1": 0.6543341082678269,
+          "macro_precision": 0.6534026181854412,
+          "fit_time_sec": 7.75
+        }
+      },
+      "vectorize_time_sec": 20.31
+    },
+    "stance_abortion": {
+      "n_train": 839,
+      "n_test": 94,
+      "n_classes": 3,
+      "models": {
+        "logreg": {
+          "accuracy": 0.7127659574468085,
+          "macro_f1": 0.6670676289762095,
+          "macro_precision": 0.6933375367801599,
+          "fit_time_sec": 0.14
+        },
+        "linear_svm": {
+          "accuracy": 0.6595744680851063,
+          "macro_f1": 0.6015771184175355,
+          "macro_precision": 0.6234342160571669,
+          "fit_time_sec": 0.04
+        }
+      },
+      "vectorize_time_sec": 0.33
+    },
+    "stance_atheism": {
+      "n_train": 659,
+      "n_test": 74,
+      "n_classes": 3,
+      "models": {
+        "logreg": {
+          "accuracy": 0.7027027027027027,
+          "macro_f1": 0.6472031488417257,
+          "macro_precision": 0.6320261437908496,
+          "fit_time_sec": 0.04
+        },
+        "linear_svm": {
+          "accuracy": 0.7162162162162162,
+          "macro_f1": 0.6592948717948718,
+          "macro_precision": 0.646016546153345,
+          "fit_time_sec": 0.04
+        }
+      },
+      "vectorize_time_sec": 0.23
+    },
+    "stance_climate": {
+      "n_train": 507,
+      "n_test": 57,
+      "n_classes": 3,
+      "models": {
+        "logreg": {
+          "accuracy": 0.7192982456140351,
+          "macro_f1": 0.47429291194320394,
+          "macro_precision": 0.46891891891891896,
+          "fit_time_sec": 0.02
+        },
+        "linear_svm": {
+          "accuracy": 0.7368421052631579,
+          "macro_f1": 0.4851851851851852,
+          "macro_precision": 0.4824561403508772,
+          "fit_time_sec": 0.03
+        }
+      },
+      "vectorize_time_sec": 0.2
+    },
+    "stance_feminist": {
+      "n_train": 854,
+      "n_test": 95,
+      "n_classes": 3,
+      "models": {
+        "logreg": {
+          "accuracy": 0.5789473684210527,
+          "macro_f1": 0.5482311389033641,
+          "macro_precision": 0.5533333333333333,
+          "fit_time_sec": 0.14
+        },
+        "linear_svm": {
+          "accuracy": 0.6,
+          "macro_f1": 0.5646100324318146,
+          "macro_precision": 0.5657471264367816,
+          "fit_time_sec": 0.04
+        }
+      },
+      "vectorize_time_sec": 0.3
+    },
+    "stance_hillary": {
+      "n_train": 885,
+      "n_test": 99,
+      "n_classes": 3,
+      "models": {
+        "logreg": {
+          "accuracy": 0.5858585858585859,
+          "macro_f1": 0.5454673892202275,
+          "macro_precision": 0.5681050656660412,
+          "fit_time_sec": 0.14
+        },
+        "linear_svm": {
+          "accuracy": 0.5959595959595959,
+          "macro_f1": 0.5211670050379728,
+          "macro_precision": 0.5478686233403215,
+          "fit_time_sec": 0.05
+        }
+      },
+      "vectorize_time_sec": 0.3
+    }
+  },
+  "summary": {
+    "logreg": {
+      "mean_macro_f1": 0.6050088292408801,
+      "mean_accuracy": 0.6604954671196479,
+      "mean_macro_precision": 0.6094854479375807,
+      "n_tasks": 11
+    },
+    "linear_svm": {
+      "mean_macro_f1": 0.5944092335692788,
+      "mean_accuracy": 0.6554224425150191,
+      "mean_macro_precision": 0.5991717386978225,
+      "n_tasks": 11
+    }
+  }
+}

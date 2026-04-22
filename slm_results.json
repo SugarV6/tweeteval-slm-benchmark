@@ -1,0 +1,104 @@
+{
+  "model": "microsoft/Phi-3-mini-4k-instruct",
+  "tasks": {
+    "stance_climate": {
+      "accuracy": 0.8947368421052632,
+      "macro_f1": 0.6055555555555555,
+      "macro_precision": 0.6052631578947368,
+      "n_train": 451,
+      "n_test": 57,
+      "epochs": 4,
+      "train_time_sec": 247.0
+    },
+    "stance_atheism": {
+      "accuracy": 0.7972972972972973,
+      "macro_f1": 0.768252603903327,
+      "macro_precision": 0.7468914395026304,
+      "n_train": 586,
+      "n_test": 74,
+      "epochs": 4,
+      "train_time_sec": 348.8
+    },
+    "stance_abortion": {
+      "accuracy": 0.7659574468085106,
+      "macro_f1": 0.7343163587364462,
+      "macro_precision": 0.7605343047965999,
+      "n_train": 746,
+      "n_test": 94,
+      "epochs": 4,
+      "train_time_sec": 418.4
+    },
+    "stance_feminist": {
+      "accuracy": 0.7578947368421053,
+      "macro_f1": 0.719485099629695,
+      "macro_precision": 0.7431318681318682,
+      "n_train": 759,
+      "n_test": 95,
+      "epochs": 4,
+      "train_time_sec": 422.7
+    },
+    "stance_hillary": {
+      "accuracy": 0.6868686868686869,
+      "macro_f1": 0.6718063163589639,
+      "macro_precision": 0.6793272864701437,
+      "n_train": 787,
+      "n_test": 99,
+      "epochs": 4,
+      "train_time_sec": 440.1
+    },
+    "irony": {
+      "accuracy": 0.7180043383947939,
+      "macro_f1": 0.7179393049437102,
+      "macro_precision": 0.7181335642222557,
+      "n_train": 1500,
+      "n_test": 461,
+      "epochs": 3,
+      "train_time_sec": 612.1
+    },
+    "emotion": {
+      "accuracy": 0.7865612648221344,
+      "macro_f1": 0.7594938001328845,
+      "macro_precision": 0.746282185741275,
+      "n_train": 1481,
+      "n_test": 506,
+      "epochs": 3,
+      "train_time_sec": 602.4
+    },
+    "hate": {
+      "accuracy": 0.7516666666666667,
+      "macro_f1": 0.7515831710102563,
+      "macro_precision": 0.7520054740261908,
+      "n_train": 1500,
+      "n_test": 600,
+      "epochs": 3,
+      "train_time_sec": 1500.3
+    },
+    "offensive": {
+      "accuracy": 0.535,
+      "macro_f1": 0.5263680578543963,
+      "macro_precision": 0.5377521302987811,
+      "n_train": 1500,
+      "n_test": 600,
+      "epochs": 3,
+      "train_time_sec": 833.0
+    },
+    "sentiment": {
+      "accuracy": 0.7183333333333334,
+      "macro_f1": 0.7213167790592635,
+      "macro_precision": 0.7329537612146307,
+      "n_train": 1500,
+      "n_test": 600,
+      "epochs": 3,
+      "train_time_sec": 896.6
+    },
+    "emoji": {
+      "accuracy": 0.215,
+      "macro_f1": 0.213889772968859,
+      "macro_precision": 0.21781380129140335,
+      "n_train": 1500,
+      "n_test": 600,
+      "epochs": 3,
+      "train_time_sec": 520.0
+    }
+  }
+}
