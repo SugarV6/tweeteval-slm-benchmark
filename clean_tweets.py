@@ -1,12 +1,3 @@
-"""
-Task 1 — Global Multi-Task Data Architecture for the TweetEval benchmark.
-
-Cleans the raw `tweets.csv` (200,785 rows, 11 sub-tasks: 5 stance variants,
-sentiment, offensive, irony, hate, emoji, emotion), produces stratified
-80/10/10 splits for every sub-task, and writes a master `task_metadata.json`
-describing per-task sizes, class distributions, and label vocabularies.
-"""
-
 from __future__ import annotations
 
 import json
@@ -22,7 +13,6 @@ RAW_CSV = ROOT / "tweets.csv"
 SPLIT_DIR = ROOT / "data" / "splits"
 META_PATH = ROOT / "task_metadata.json"
 
-# Official TweetEval label vocabularies (Barbieri et al., 2020).
 LABEL_NAMES: dict[str, list[str]] = {
     "emoji": [
         "red_heart", "smiling_face_with_hearteyes", "face_with_tears_of_joy",
@@ -44,26 +34,23 @@ LABEL_NAMES: dict[str, list[str]] = {
     "stance_hillary": ["none", "against", "favor"],
 }
 
-# --- Text cleaning -------------------------------------------------------
-
 URL_RE = re.compile(r"https?://\S+|www\.\S+")
 MENTION_RE = re.compile(r"@\w+")
 HASHTAG_RE = re.compile(r"#(\w+)")
-# Strip unicode emoji / pictographs / symbols / dingbats.
 EMOJI_RE = re.compile(
     "["
-    "\U0001F1E0-\U0001F1FF"  # flags
-    "\U0001F300-\U0001F5FF"  # symbols & pictographs
-    "\U0001F600-\U0001F64F"  # emoticons
-    "\U0001F680-\U0001F6FF"  # transport
+    "\U0001F1E0-\U0001F1FF"
+    "\U0001F300-\U0001F5FF"
+    "\U0001F600-\U0001F64F"
+    "\U0001F680-\U0001F6FF"
     "\U0001F700-\U0001F77F"
     "\U0001F780-\U0001F7FF"
     "\U0001F800-\U0001F8FF"
     "\U0001F900-\U0001F9FF"
     "\U0001FA00-\U0001FA6F"
     "\U0001FA70-\U0001FAFF"
-    "\U00002600-\U000026FF"  # misc symbols
-    "\U00002700-\U000027BF"  # dingbats
+    "\U00002600-\U000026FF"
+    "\U00002700-\U000027BF"
     "]+",
     flags=re.UNICODE,
 )
@@ -75,8 +62,8 @@ def clean_text(raw: str) -> str:
         return ""
     t = raw.replace("\n", " ").replace("\r", " ")
     t = URL_RE.sub(" ", t)
-    t = MENTION_RE.sub("@user", t)         # canonical placeholder (TweetEval convention)
-    t = HASHTAG_RE.sub(r"\1", t)           # keep hashtag word
+    t = MENTION_RE.sub("@user", t)
+    t = HASHTAG_RE.sub(r"\1", t)
     t = EMOJI_RE.sub(" ", t)
     t = re.sub(r"&amp;", "&", t)
     t = re.sub(r"&lt;", "<", t)
@@ -85,13 +72,7 @@ def clean_text(raw: str) -> str:
     return t
 
 
-# --- Stratified splitting ------------------------------------------------
-
 def stratified_split(df: pd.DataFrame, seed: int = 42) -> dict[str, pd.DataFrame]:
-    """
-    Produce 80/10/10 train/val/test with stratification where feasible.
-    Falls back to unstratified when a class has < 2 members.
-    """
     counts = df["label"].value_counts()
     strat = df["label"] if counts.min() >= 2 else None
     train, rest = train_test_split(
@@ -105,22 +86,17 @@ def stratified_split(df: pd.DataFrame, seed: int = 42) -> dict[str, pd.DataFrame
     return {"train": train, "val": val, "test": test}
 
 
-# --- Main ----------------------------------------------------------------
-
 def main() -> None:
     print(f"[clean_tweets] Loading {RAW_CSV}")
     df = pd.read_csv(RAW_CSV)
     n_raw = len(df)
     print(f"[clean_tweets] raw rows = {n_raw:,}")
 
-    # Drop null text rows
     df = df.dropna(subset=["text"]).copy()
     df["label"] = df["label"].astype(int)
 
-    # Clean text
     df["clean_text"] = df["text"].astype(str).map(clean_text)
 
-    # Drop rows whose cleaned text is empty (cannot be used for modeling).
     before = len(df)
     df = df[df["clean_text"].str.len() > 0].copy()
     print(f"[clean_tweets] dropped {before - len(df):,} empty rows after cleaning")

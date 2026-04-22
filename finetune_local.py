@@ -1,24 +1,3 @@
-"""
-Task 3 — Local SLM Multi-Task Fine-Tuning.
-
-Fine-tunes `microsoft/Phi-3-mini-4k-instruct` independently on every one of
-the 11 TweetEval sub-tasks from Task 1, using 4-bit NF4 quantization +
-LoRA (r=16, alpha=32) so that the whole pipeline fits on a 12 GB RTX 3060.
-For each task the script:
-
-    1. Loads the stratified train/val/test splits produced by clean_tweets.py.
-    2. Builds a Phi-3 Sequence-Classification head on top of the frozen,
-       4-bit quantized backbone.
-    3. Trains LoRA adapters with `Trainer` using paged-AdamW-8bit.
-    4. Evaluates on the held-out test split (macro-F1, accuracy,
-       macro-precision).
-    5. Saves per-task LoRA adapters, a global comparison CSV vs the TF-IDF
-       baselines, and a combined `misclassified.csv` sample.
-
-The script is idempotent — if `slm_results.json` already contains a task's
-metrics it is skipped, so training can be resumed after a crash.
-"""
-
 from __future__ import annotations
 
 import gc
@@ -43,8 +22,6 @@ from transformers import (
 from peft import LoraConfig, TaskType, get_peft_model, prepare_model_for_kbit_training
 from datasets import Dataset
 
-# ------------------------- config --------------------------------------
-
 ROOT = Path(__file__).resolve().parent
 SPLIT_DIR = ROOT / "data" / "splits"
 META_PATH = ROOT / "task_metadata.json"
@@ -56,7 +33,7 @@ ADAPTER_DIR = ROOT / "slm_adapters"
 
 MODEL_NAME = "microsoft/Phi-3-mini-4k-instruct"
 MAX_LEN = 128
-MAX_TRAIN_PER_TASK = 1500       # cap to keep wall-clock tractable on a 3060
+MAX_TRAIN_PER_TASK = 1500
 MAX_TEST_PER_TASK = 600
 SEED = 42
 
@@ -67,8 +44,6 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed_all(SEED)
 
 
-# ------------------------- data ----------------------------------------
-
 def _read(task: str, split: str) -> pd.DataFrame:
     df = pd.read_csv(SPLIT_DIR / task / f"{split}.csv")
     df["clean_text"] = df["clean_text"].fillna("").astype(str)
@@ -78,7 +53,6 @@ def _read(task: str, split: str) -> pd.DataFrame:
 def _subsample(df: pd.DataFrame, cap: int, seed: int = SEED) -> pd.DataFrame:
     if len(df) <= cap:
         return df
-    # stratified subsample to preserve label balance
     per_class = cap // df["label"].nunique()
     parts = []
     for lbl, g in df.groupby("label"):
@@ -100,8 +74,6 @@ def build_hf_dataset(df: pd.DataFrame, tokenizer) -> Dataset:
     ds = ds.rename_column("label", "labels")
     return ds
 
-
-# ------------------------- modeling ------------------------------------
 
 def make_model(n_labels: int, tokenizer):
     bnb_config = BitsAndBytesConfig(
@@ -129,7 +101,7 @@ def make_model(n_labels: int, tokenizer):
         lora_dropout=0.05,
         bias="none",
         target_modules=["qkv_proj", "o_proj", "gate_up_proj", "down_proj"],
-        modules_to_save=["score"],   # keep the classification head trainable
+        modules_to_save=["score"],
     )
     model = get_peft_model(model, lora)
     model.print_trainable_parameters()
@@ -147,8 +119,6 @@ def compute_metrics(eval_pred):
         ),
     }
 
-
-# ------------------------- training loop -------------------------------
 
 def train_one_task(task: str, tokenizer, metadata) -> dict:
     print(f"\n================= TASK: {task} =================")
@@ -172,7 +142,6 @@ def train_one_task(task: str, tokenizer, metadata) -> dict:
 
     model = make_model(n_labels, tokenizer)
 
-    # Epochs: more epochs for small tasks, fewer for large
     n_train = len(train_df)
     if n_train <= 800:
         epochs = 4
@@ -223,7 +192,6 @@ def train_one_task(task: str, tokenizer, metadata) -> dict:
     trainer.train()
     train_sec = time.time() - t0
 
-    # -------- test evaluation --------
     model.eval()
     eval_loader = torch.utils.data.DataLoader(
         test_ds, batch_size=16, collate_fn=collator
@@ -257,13 +225,11 @@ def train_one_task(task: str, tokenizer, metadata) -> dict:
           f"f1={metrics['macro_f1']:.4f} prec={metrics['macro_precision']:.4f} "
           f"(train {train_sec:.0f}s)")
 
-    # Save LoRA adapter
     try:
         model.save_pretrained(str(out_dir / "lora"))
     except Exception as e:
         print(f"[{task}] adapter save warning: {e}")
 
-    # -------- misclassifications (up to 20) --------
     texts = test_df["clean_text"].tolist()
     wrong_rows = []
     for i, (yt, yp) in enumerate(zip(all_labels.tolist(), all_preds.tolist())):
@@ -277,15 +243,12 @@ def train_one_task(task: str, tokenizer, metadata) -> dict:
     random.shuffle(wrong_rows)
     wrong_rows = wrong_rows[:20]
 
-    # cleanup GPU
     del trainer, model
     gc.collect()
     torch.cuda.empty_cache()
 
     return {"metrics": metrics, "misclassified": wrong_rows}
 
-
-# ------------------------- main ----------------------------------------
 
 def main() -> None:
     with open(META_PATH, "r", encoding="utf-8") as f:
@@ -301,7 +264,6 @@ def main() -> None:
         tokenizer.pad_token = tokenizer.unk_token or tokenizer.eos_token
     tokenizer.padding_side = "right"
 
-    # Resume support
     slm_results: dict = {"model": MODEL_NAME, "tasks": {}}
     if SLM_RESULTS_PATH.exists():
         slm_results = json.loads(SLM_RESULTS_PATH.read_text())
@@ -316,7 +278,6 @@ def main() -> None:
         except Exception:
             all_misclassified = []
 
-    # small → large so we fail fast on the easy tasks
     order = sorted(tasks, key=lambda t: metadata["tasks"][t]["n_train"])
 
     for task in order:
@@ -341,7 +302,6 @@ def main() -> None:
         if all_misclassified:
             pd.DataFrame(all_misclassified).to_csv(mis_path, index=False)
 
-    # ----- global comparison CSV -----
     rows = []
     for task in tasks:
         base_lr = (baseline["tasks"].get(task, {}).get("models", {})

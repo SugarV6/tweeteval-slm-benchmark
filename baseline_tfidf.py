@@ -1,12 +1,3 @@
-"""
-Task 2 — Multi-Task Baseline Benchmarking.
-
-Trains and evaluates TF-IDF (word 1-2grams + char 3-5grams) followed by
-(a) Logistic Regression and (b) Linear SVM across ALL 11 TweetEval sub-tasks,
-reporting Accuracy, Macro-F1, and Macro-Precision on each task's held-out
-test split. Results are written to `full_baseline_results.json`.
-"""
-
 from __future__ import annotations
 
 import json
@@ -138,7 +129,6 @@ def main() -> None:
 
         results["tasks"][task]["vectorize_time_sec"] = round(vec_time, 2)
 
-    # Per-model summary (averaged across tasks).
     for model in ["logreg", "linear_svm"]:
         macro_f1s = [
             results["tasks"][t]["models"][model]["macro_f1"] for t in tasks
