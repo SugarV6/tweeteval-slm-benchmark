@@ -1,6 +1,6 @@
 # TweetEval SLM Benchmark
 
-My CS465 machine learning project. I compare a classical TF-IDF + linear
+machine learning project. I compare a classical TF-IDF + linear
 model baseline against a fine-tuned Phi-3-mini (3.8B) small language model
 across all 11 TweetEval sub-tasks on a single 12 GB RTX 3060.
 
